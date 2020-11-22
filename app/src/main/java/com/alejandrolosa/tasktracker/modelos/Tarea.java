@@ -4,25 +4,31 @@ public class Tarea {
     // Atributos
     private int id;
     private String titulo;
-    private String mensaje;
+    private String descripcion;
     private Fecha fecha;
     private boolean importante;
-    private TipoTarea tipo;
+    private String tipo;
+    private boolean status;
+    private ColorRGB color;
 
     // Constructores
-    public Tarea(String titulo, String mensaje, Fecha fecha, boolean importancia, TipoTarea tipo) {
+    public Tarea(String titulo, String descripcion, Fecha fecha, boolean importancia, String tipo, ColorRGB color) {
         this.titulo = titulo;
-        this.mensaje = mensaje;
+        this.descripcion = descripcion;
         this.fecha = fecha;
         this.importante = importancia;
         this.tipo = tipo;
+        this.color = color;
+        this.status = false;
     }
 
-    public Tarea(String titulo, Fecha fecha, boolean importancia, TipoTarea tipo){
+    public Tarea(String titulo, Fecha fecha, boolean importancia, String tipo, ColorRGB color){
         this.titulo = titulo;
         this.fecha = fecha;
         this.importante = importancia;
         this.tipo = tipo;
+        this.color = color;
+        this.status = false;
     }
 
     // Getters y setters
@@ -43,12 +49,12 @@ public class Tarea {
         this.titulo = titulo;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Fecha getFecha() {
@@ -67,11 +73,23 @@ public class Tarea {
         this.importante = importante;
     }
 
-    public TipoTarea getTipo() {
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoTarea tipo) {
+    public ColorRGB getColor() { return color; }
+
+    public void setColor(ColorRGB color) { this.color = color; }
+
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 }

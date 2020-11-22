@@ -9,8 +9,8 @@ public class ColorRGB {
         this.green = g;
         this.blue = b;
 
-        String hex = "";
-        hex.concat(Integer.toHexString(r)).concat(", ").concat(Integer.toHexString(g)).concat(", ").concat(Integer.toHexString(b));
+        hex = "#";
+        hex.concat(Integer.toHexString(r)).concat(Integer.toHexString(g)).concat(Integer.toHexString(b));
         this.hex = hex;
     }
 

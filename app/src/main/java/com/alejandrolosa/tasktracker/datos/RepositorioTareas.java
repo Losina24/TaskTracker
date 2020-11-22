@@ -9,4 +9,5 @@ public interface RepositorioTareas {
     int tamanyo(); // Devuelve el número de tareas
     void actualiza(int id, Tarea tarea); // Reemplaza un elemento
 
+    void anyadeEjemplos();
 }
