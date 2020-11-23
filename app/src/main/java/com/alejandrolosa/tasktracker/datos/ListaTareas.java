@@ -41,5 +41,6 @@ public class ListaTareas implements RepositorioTareas {
         anyade(new Tarea("Mi Tarea 3", "Esta es una tarea que he creado", new Fecha(24, 11, 2020), false,"Trabajo", Color.VERDE.getRGB()));
         anyade(new Tarea("Mi Tarea 4", "Esta es una tarea que he creado", new Fecha(25, 11, 2020), false,"Trabajo", Color.MORADO.getRGB()));
         anyade(new Tarea("Mi Tarea 5", "Esta es una tarea que he creado", new Fecha(26, 11, 2020), false,"Trabajo", Color.CIAN.getRGB()));
+        anyade(new Tarea("Mi Tarea 6", "Esta es una tarea que he creado", new Fecha(26, 11, 2020), false,"Trabajo", Color.CIAN.getRGB()));
     }
 }

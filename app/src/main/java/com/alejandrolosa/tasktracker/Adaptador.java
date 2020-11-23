@@ -23,6 +23,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     public Adaptador(RepositorioTareas tareas) {
         this.tareas = tareas;
     }
+    protected View.OnClickListener onClickListener;
 
     //Creamos nuestro ViewHolder, con los tipos de elementos a modificar
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +40,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
             fecha = itemView.findViewById(R.id.fecha);
             importancia = itemView.findViewById(R.id.iconoAlerta);
             checkbox = itemView.findViewById(R.id.checkbox_tarea);
-            color = itemView.findViewById(R.id.colorVer);
+            color = itemView.findViewById(R.id.colorVer);;
         }
 
         public void personaliza(Tarea tarea){
@@ -62,10 +63,15 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         }
     }
 
+    public void setOnItemClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Inflamos la vista desde el xml
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listelement, parent, false);
+        v.setOnClickListener(onClickListener);
         return new ViewHolder(v);
     }
 

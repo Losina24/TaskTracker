@@ -19,5 +19,7 @@
         </activity>
         <activity android:name=".AcercaDeActivity"
             android:theme="@style/actionDark"/>
+        <activity android:name=".VistaTareaActivity"
+            android:theme="@style/Theme.MaterialComponents.BottomSheetDialog"/>
     </application>
 </manifest>
