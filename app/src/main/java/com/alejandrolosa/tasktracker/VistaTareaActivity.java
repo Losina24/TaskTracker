@@ -23,11 +23,13 @@ public class VistaTareaActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ver_tarea);
+
         Bundle extras = getIntent().getExtras();
         pos = extras.getInt("pos", 0);
         tareas = ((Aplicacion) getApplication()).tareas;
         usoTarea = new CasosUsoTarea(this, tareas);
         tarea = tareas.elemento(pos);
+
         actualizaVistas();
     }
 

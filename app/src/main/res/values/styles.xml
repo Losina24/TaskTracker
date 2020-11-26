@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="actionDark" parent="Theme.AppCompat.DayNight.Dialog.Alert"/>
+
+    <!--<style name="VerTema" parent="Theme.TaskTracker">
+        <item name="bottomSheetStyle">@style/VerVentana</item>
+    </style>
+    <style name="VerVentana" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>-->
+
 </resources>

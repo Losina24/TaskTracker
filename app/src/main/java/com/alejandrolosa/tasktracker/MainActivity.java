@@ -11,10 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.alejandrolosa.tasktracker.R;
 import com.alejandrolosa.tasktracker.casos_uso.CasosUsoTarea;
 import com.alejandrolosa.tasktracker.datos.RepositorioTareas;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class MainActivity extends AppCompatActivity {
     // Atributos
@@ -53,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 usoTarea.mostrar(pos);
             }
         });
+
+
     }
 
     @Override
