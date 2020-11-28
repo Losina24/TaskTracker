@@ -1,10 +1,11 @@
 package com.alejandrolosa.tasktracker.modelos;
 
+import com.alejandrolosa.tasktracker.datos.Color;
+
 public class Tarea {
     // Atributos
     private int id;
     private String titulo;
-    private String descripcion;
     private Fecha fecha;
     private boolean importante;
     private String tipo;
@@ -12,17 +13,7 @@ public class Tarea {
     private ColorRGB color;
 
     // Constructores
-    public Tarea(String titulo, String descripcion, Fecha fecha, boolean importancia, String tipo, ColorRGB color) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
-        this.importante = importancia;
-        this.tipo = tipo;
-        this.color = color;
-        this.status = false;
-    }
-
-    public Tarea(String titulo, Fecha fecha, boolean importancia, String tipo, ColorRGB color){
+    public Tarea(String titulo, Fecha fecha, boolean importancia, String tipo, ColorRGB color) { // Constructor completo
         this.titulo = titulo;
         this.fecha = fecha;
         this.importante = importancia;
@@ -47,14 +38,6 @@ public class Tarea {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public Fecha getFecha() {

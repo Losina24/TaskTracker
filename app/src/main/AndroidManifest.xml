@@ -20,6 +20,8 @@
         <activity android:name=".AcercaDeActivity"
             android:theme="@style/actionDark"/>
         <activity android:name=".VistaTareaActivity"
-            android:theme="@style/Theme.MaterialComponents.BottomSheetDialog"/>
+            android:theme="@style/Theme.VerTarea"/>
+        <activity android:name=".CrearTareaActivity"
+            android:theme="@style/Theme.VerTarea"/>
     </application>
 </manifest>

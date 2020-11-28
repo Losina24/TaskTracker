@@ -6,13 +6,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.alejandrolosa.tasktracker.casos_uso.CasosUsoTarea;
+import com.alejandrolosa.tasktracker.datos.Color;
+import com.alejandrolosa.tasktracker.datos.DatabaseSQLite;
 import com.alejandrolosa.tasktracker.datos.RepositorioTareas;
+import com.alejandrolosa.tasktracker.modelos.ColorRGB;
+import com.alejandrolosa.tasktracker.modelos.Fecha;
+import com.alejandrolosa.tasktracker.modelos.Tarea;
 
 public class MainActivity extends AppCompatActivity {
     // Atributos
@@ -28,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Base de datos
+        DatabaseSQLite conn = new DatabaseSQLite(this, "bd_tareas", null, 1);
+
         // Menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,23 +47,6 @@ public class MainActivity extends AppCompatActivity {
         // Creamos el caso de uso y le pasamos el contexto y el repositorio
         tareas = ((Aplicacion) getApplication()).tareas;
         usoTarea = new CasosUsoTarea(this, tareas);
-
-        // Recycler View
-        adaptador = ((Aplicacion) getApplication()).adaptador;
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adaptador);
-
-        // Escuchador al seleccionar un elemento del RecyclerView
-        adaptador.setOnItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int pos = recyclerView.getChildAdapterPosition(v);
-                usoTarea.mostrar(pos);
-            }
-        });
-
 
     }
 
@@ -64,12 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             //mostrarConfigurar(null);
             return true;
@@ -77,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.acercaDe) {
             lanzarAcercaDe(null);
+            return true;
+        }
+
+        if (id == R.id.addTarea) {
+            lanzarAddTarea(null);
             return true;
         }
 
@@ -93,10 +89,68 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Recycler View
+        generarTareas(null);
+        adaptador = ((Aplicacion) getApplication()).adaptador;
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adaptador);
+
+        // Escuchador al seleccionar un elemento del RecyclerView
+        adaptador.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = recyclerView.getChildAdapterPosition(v);
+                usoTarea.mostrar(pos);
+            }
+        });
+    }
 
     public void lanzarAcercaDe(View view){
         Intent i = new Intent(this, AcercaDeActivity.class);
         startActivity(i);
     }
 
+    public void lanzarAddTarea(View view){
+        usoTarea.crear();
+    }
+
+    public void generarTareas(View view){
+        tareas.vaciar();
+        DatabaseSQLite conn = new DatabaseSQLite(this, "bd_tareas", null, 1);
+        SQLiteDatabase database = conn.getWritableDatabase();
+
+        Cursor consulta = database.rawQuery("SELECT * FROM tareas", null);
+
+        if (consulta.moveToFirst()){
+            for(int i = 0; i < consulta.getCount(); i++){
+                ColorRGB colors = Color.ROJO.getRGB();
+
+                boolean aux;
+                if(Integer.parseInt(consulta.getString(5)) == 1){
+                    aux = true;
+                } else {
+                    aux = false;
+                }
+
+                //colors = Color.getColorDadoString(consulta.getString(8));
+
+                tareas.anyade(new Tarea(consulta.getString(1),
+                        new Fecha(Integer.parseInt(consulta.getString(2)),
+                        Integer.parseInt(consulta.getString(3)),
+                        Integer.parseInt(consulta.getString(4))),
+                        aux,
+                        consulta.getString(6),
+                        colors));
+
+                consulta.moveToNext();
+            }
+
+        }
+    }
 }

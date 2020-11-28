@@ -30,6 +30,7 @@ public class VistaTareaActivity extends AppCompatActivity {
         usoTarea = new CasosUsoTarea(this, tareas);
         tarea = tareas.elemento(pos);
 
+
         actualizaVistas();
     }
 
@@ -45,9 +46,6 @@ public class VistaTareaActivity extends AppCompatActivity {
 
         CheckBox status = findViewById(R.id.checkboxTareaEditar);
         status.setChecked(tarea.isStatus());
-
-        TextView descripcion = findViewById(R.id.descripcionEditar);
-        descripcion.setText(tarea.getDescripcion());
 
         ConstraintLayout color = findViewById(R.id.colorVer);
         color.setBackgroundColor(Color.rgb(tarea.getColor().getRed(), tarea.getColor().getGreen(), tarea.getColor().getBlue()));
