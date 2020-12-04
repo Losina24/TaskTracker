@@ -13,13 +13,14 @@ public class Tarea {
     private ColorRGB color;
 
     // Constructores
-    public Tarea(String titulo, Fecha fecha, boolean importancia, String tipo, ColorRGB color) { // Constructor completo
+    public Tarea(String titulo, Fecha fecha, boolean importancia, String tipo, ColorRGB color, int id) { // Constructor completo
         this.titulo = titulo;
         this.fecha = fecha;
         this.importante = importancia;
         this.tipo = tipo;
         this.color = color;
         this.status = false;
+        this.id = id;
     }
 
     // Getters y setters

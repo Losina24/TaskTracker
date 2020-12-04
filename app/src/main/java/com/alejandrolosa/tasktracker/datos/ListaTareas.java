@@ -40,11 +40,11 @@ public class ListaTareas implements RepositorioTareas {
     }
 
     public void anyadeEjemplos() {
-        anyade(new Tarea("Mi Tarea 1",  new Fecha(22, 11, 2020), false,"Trabajo", Color.ROJO.getRGB()));
-        anyade(new Tarea("Mi Tarea 2",  new Fecha(23, 11, 2020), false,"Trabajo", Color.AZUL.getRGB()));
-        anyade(new Tarea("Mi Tarea 3",  new Fecha(24, 11, 2020), false,"Trabajo", Color.VERDE.getRGB()));
-        anyade(new Tarea("Mi Tarea 4",  new Fecha(25, 11, 2020), false,"Trabajo", Color.MORADO.getRGB()));
-        anyade(new Tarea("Mi Tarea 5",  new Fecha(26, 11, 2020), false,"Trabajo", Color.CIAN.getRGB()));
-        anyade(new Tarea("Mi Tarea 6",  new Fecha(26, 11, 2020), false,"Trabajo", Color.CIAN.getRGB()));
+        anyade(new Tarea("Mi Tarea 1",  new Fecha(22, 11, 2020), false,"Trabajo", Color.ROJO.getRGB(), 0));
+        anyade(new Tarea("Mi Tarea 2",  new Fecha(23, 11, 2020), false,"Trabajo", Color.AZUL.getRGB(), 1));
+        anyade(new Tarea("Mi Tarea 3",  new Fecha(24, 11, 2020), false,"Trabajo", Color.VERDE.getRGB(), 2));
+        anyade(new Tarea("Mi Tarea 4",  new Fecha(25, 11, 2020), false,"Trabajo", Color.MORADO.getRGB(), 3));
+        anyade(new Tarea("Mi Tarea 5",  new Fecha(26, 11, 2020), false,"Trabajo", Color.CIAN.getRGB(), 4));
+        anyade(new Tarea("Mi Tarea 6",  new Fecha(26, 11, 2020), false,"Trabajo", Color.CIAN.getRGB(), 5));
     }
 }

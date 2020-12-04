@@ -1,5 +1,7 @@
 package com.alejandrolosa.tasktracker.datos;
 
+import android.util.Log;
+
 import com.alejandrolosa.tasktracker.modelos.ColorRGB;
 
 public enum Color {
@@ -21,13 +23,13 @@ public enum Color {
     }
 
     public static ColorRGB getColorDadoString(String texto){
-        Color resultado = null;
+        boolean aux;
         for (Color color : Color.values()) {
-            if(color.nombre == texto){
-                resultado = color;
+            if(color.nombre.matches(texto)){
+                return color.color;
             }
         }
-        return resultado.getRGB();
+        return ROJO.getRGB();
     }
 
     public String getColor(){

@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alejandrolosa.tasktracker.casos_uso.CasosUsoTarea;
 import com.alejandrolosa.tasktracker.datos.Color;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private CasosUsoTarea usoTarea;
     private RecyclerView recyclerView;
     public Adaptador adaptador;
+    private TextView sinTareas;
 
     // Métodos
     @Override
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Base de datos
-        DatabaseSQLite conn = new DatabaseSQLite(this, "bd_tareas", null, 1);
+        //DatabaseSQLite conn = new DatabaseSQLite(this, "bd_tareas", null, 1);
 
         // Menu
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         // Creamos el caso de uso y le pasamos el contexto y el repositorio
         tareas = ((Aplicacion) getApplication()).tareas;
         usoTarea = new CasosUsoTarea(this, tareas);
-
     }
 
     @Override
@@ -94,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         // Recycler View
-        generarTareas(null);
         adaptador = ((Aplicacion) getApplication()).adaptador;
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
                 usoTarea.mostrar(pos);
             }
         });
+
+        generarTareas(null);
     }
 
     public void lanzarAcercaDe(View view){
@@ -129,16 +131,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (consulta.moveToFirst()){
             for(int i = 0; i < consulta.getCount(); i++){
-                ColorRGB colors = Color.ROJO.getRGB();
-
+                ColorRGB colors = Color.getColorDadoString(consulta.getString(8));
                 boolean aux;
+
                 if(Integer.parseInt(consulta.getString(5)) == 1){
                     aux = true;
                 } else {
                     aux = false;
                 }
-
-                //colors = Color.getColorDadoString(consulta.getString(8));
 
                 tareas.anyade(new Tarea(consulta.getString(1),
                         new Fecha(Integer.parseInt(consulta.getString(2)),
@@ -146,11 +146,14 @@ public class MainActivity extends AppCompatActivity {
                         Integer.parseInt(consulta.getString(4))),
                         aux,
                         consulta.getString(6),
-                        colors));
+                        colors,
+                        Integer.parseInt(consulta.getString(0))));
 
                 consulta.moveToNext();
             }
-
+        } else {
+            sinTareas = findViewById(R.id.sinTareas);
+            sinTareas.setVisibility(View.VISIBLE);
         }
     }
 }

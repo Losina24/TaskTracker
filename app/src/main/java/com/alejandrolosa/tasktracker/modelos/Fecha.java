@@ -1,5 +1,9 @@
 package com.alejandrolosa.tasktracker.modelos;
 
+import android.util.Log;
+
+import java.util.Calendar;
+
 public class Fecha {
     private int dia;
     private int mes;
@@ -95,6 +99,66 @@ public class Fecha {
         sb.append(mes);
         sb.append("-");
         sb.append(anyo);
+        return sb.toString();
+    }
+
+    public String toStringCompacto() {
+        StringBuilder sb = new StringBuilder();
+
+        Calendar calendario = Calendar.getInstance();
+        String fechaString = ""+anyo+mes+dia;
+        int mesActual = calendario.get(Calendar.MONTH) + 1;
+        String hoyString = ""+calendario.get(Calendar.YEAR)+mesActual+calendario.get(Calendar.DAY_OF_MONTH);
+        int res = Integer.parseInt(fechaString) - Integer.parseInt(hoyString);
+
+        if (res == 0){
+            sb.append("Hoy");
+        } else if (res == 1){
+            sb.append("Mañana");
+        } else if (res == 2){
+            sb.append("2 días");
+        } else if (res == 3){
+            sb.append("3 días");
+        } else if (res == 4){
+            sb.append("4 días");
+        } else if (res == 5){
+            sb.append("5 días");
+        } else { // Si la fecha corresponde al año actual
+            sb.append(dia);
+
+            if(mes == 1){
+                sb.append(" Ene.");
+            } else if (mes == 2){
+                sb.append(" Feb.");
+            } else if (mes == 3){
+                sb.append(" Mar.");
+            } else if (mes == 4){
+                sb.append(" Abr.");
+            } else if (mes == 5){
+                sb.append(" May.");
+            } else if (mes == 6){
+                sb.append(" Jun.");
+            } else if (mes == 7){
+                sb.append(" Jul.");
+            } else if (mes == 8){
+                sb.append(" Ago.");
+            } else if (mes == 9){
+                sb.append(" Sep.");
+            } else if (mes == 10){
+                sb.append(" Oct.");
+            } else if (mes == 11){
+                sb.append(" Nov.");
+            } else {
+                sb.append(" Dic.");
+            }
+
+            if(anyo != calendario.get(Calendar.YEAR)){
+                sb.append(" ");
+                String c  = String.valueOf(anyo);
+                sb.append(c.substring(c.length() - 2));
+            }
+        }
+
         return sb.toString();
     }
 }

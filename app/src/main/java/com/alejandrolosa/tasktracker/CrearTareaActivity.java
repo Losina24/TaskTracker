@@ -1,6 +1,7 @@
 package com.alejandrolosa.tasktracker;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -155,7 +156,7 @@ public class CrearTareaActivity extends AppCompatActivity {
         String titulo = campoTitulo.getText().toString();
         String color = spinnerColor.getSelectedItem().toString();
         String importancia = spinnerImportancia.getSelectedItem().toString();
-        String tag = spinnerTag.getSelectedItem().toString();
+        String tag = spinnerTag.getSelectedItem().toString();;
         int urgente;
 
         if(importancia == "Urgente"){
@@ -164,19 +165,19 @@ public class CrearTareaActivity extends AppCompatActivity {
             urgente = 0;
         }
 
-        if(!titulo.isEmpty()){
-            /*ContentValues valores = new ContentValues();
-            valores.put(UtilidadesDatabase.TAREA_TITULO, titulo);
-            valores.put(UtilidadesDatabase.TAREA_DIA, diaCalendario);
-            valores.put(UtilidadesDatabase.TAREA_MES, mesCalendario);
-            valores.put(UtilidadesDatabase.TAREA_YEAR, yearCalendario);
-            valores.put(UtilidadesDatabase.TAREA_COLOR, color);
-            valores.put(UtilidadesDatabase.TAREA_IMPORTANCIA, urgente);
-            valores.put(UtilidadesDatabase.TAREA_ESTADO, 0);
-            valores.put(UtilidadesDatabase.TAREA_TIPO, tag);
+        if(diaCalendario == 0 && mesCalendario == 0 && yearCalendario == 0){
+            Calendar calendario = Calendar.getInstance();
+            diaCalendario = calendario.get(Calendar.DATE);
+            mesCalendario = calendario.get(Calendar.MONTH) + 1;
+            yearCalendario = calendario.get(Calendar.YEAR);
+        }
 
-            db.insert(UtilidadesDatabase.TABLA_TAREAS, null, valores);
-            db.close();*/
+        if(color == ""){
+            color = "Rojo";
+        }
+
+
+        if(!titulo.isEmpty()){
             String query = "INSERT INTO "+UtilidadesDatabase.TABLA_TAREAS+"('"+UtilidadesDatabase.TAREA_TITULO+"', '"+UtilidadesDatabase.TAREA_TIPO+
                     "', '"+UtilidadesDatabase.TAREA_COLOR+"', '"+UtilidadesDatabase.TAREA_IMPORTANCIA+
                     "', '"+UtilidadesDatabase.TAREA_DIA+"', '"+UtilidadesDatabase.TAREA_MES+
@@ -189,6 +190,7 @@ public class CrearTareaActivity extends AppCompatActivity {
             db.close();
 
             finish();
+
             Toast.makeText(this, "Tarea creada :)", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "No hay texto en la tarea", Toast.LENGTH_SHORT).show();

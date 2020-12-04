@@ -40,13 +40,13 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
             fecha = itemView.findViewById(R.id.fecha);
             importancia = itemView.findViewById(R.id.iconoAlerta);
             checkbox = itemView.findViewById(R.id.checkbox_tarea);
-            color = itemView.findViewById(R.id.colorVer);;
+            color = itemView.findViewById(R.id.colorVer);
         }
 
         public void personaliza(Tarea tarea){
             titulo.setText(tarea.getTitulo());
             tipo.setText(tarea.getTipo());
-            fecha.setText(tarea.getFecha().toString());
+            fecha.setText(tarea.getFecha().toStringCompacto());
             color.setBackgroundColor(Color.rgb(tarea.getColor().getRed(), tarea.getColor().getGreen(), tarea.getColor().getBlue()));
 
             if(tarea.isImportante() == true){

@@ -29,6 +29,6 @@ public class ColorRGB {
 
     @Override
     public String toString() {
-        return red + ", " + green + ", " + blue;
+        return this.red + ", " + this.green + ", " + this.blue;
     }
 }
