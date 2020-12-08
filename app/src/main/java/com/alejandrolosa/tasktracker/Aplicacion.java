@@ -10,6 +10,7 @@ import com.alejandrolosa.tasktracker.datos.RepositorioTareas;
 public class Aplicacion extends Application {
     public RepositorioTareas tareas = new ListaTareas();
     public Adaptador adaptador = new Adaptador(tareas);
+    public AdaptadorCompletas adaptadorCompletas = new AdaptadorCompletas(tareas);
 
     @Override
     public void onCreate() {

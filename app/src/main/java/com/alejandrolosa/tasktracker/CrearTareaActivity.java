@@ -59,7 +59,6 @@ public class CrearTareaActivity extends AppCompatActivity {
 
         // Enlazar variables a elementos del layout //
         enviarFormulario = findViewById(R.id.botonEnviar);
-        aceptarFecha = findViewById(R.id.botonAceptarFecha);
         botonTag = findViewById(R.id.botonTag);
         botonColor = findViewById(R.id.botonColor);
         botonFecha = findViewById(R.id.botonFecha);
@@ -71,6 +70,7 @@ public class CrearTareaActivity extends AppCompatActivity {
         constraintLayoutCrear = findViewById(R.id.constraintLayoutCrear);
         calendario = findViewById(R.id.datePicker);
         campoTitulo = findViewById(R.id.inputTitulo);
+        aceptarFecha = findViewById(R.id.botonAceptarFecha);
 
         // Escuchadores CLICK //
         constraintLayoutCrear.setOnClickListener(new View.OnClickListener() {
@@ -143,8 +143,8 @@ public class CrearTareaActivity extends AppCompatActivity {
 
         // Importancia
         ArrayAdapter<String> adaptadorImportancia = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        adaptadorImportancia.add("Urgente");
         adaptadorImportancia.add("No urgente");
+        adaptadorImportancia.add("Urgente");
         adaptadorImportancia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerImportancia.setAdapter(adaptadorImportancia);
     }
@@ -156,8 +156,11 @@ public class CrearTareaActivity extends AppCompatActivity {
         String titulo = campoTitulo.getText().toString();
         String color = spinnerColor.getSelectedItem().toString();
         String importancia = spinnerImportancia.getSelectedItem().toString();
-        String tag = spinnerTag.getSelectedItem().toString();;
+        String tag = spinnerTag.getSelectedItem().toString();
         int urgente;
+        String ordenMes = "";
+        String ordenDia = "";
+        int orden = 0;
 
         if(importancia == "Urgente"){
             urgente = 1;
@@ -172,6 +175,20 @@ public class CrearTareaActivity extends AppCompatActivity {
             yearCalendario = calendario.get(Calendar.YEAR);
         }
 
+        if(mesCalendario < 10){
+            ordenMes = "0"+mesCalendario;
+        } else {
+            ordenMes = ""+mesCalendario;
+        }
+
+        if(diaCalendario < 10){
+            ordenDia = "0"+diaCalendario;
+        } else {
+            ordenDia = ""+diaCalendario;
+        }
+
+        orden = Integer.parseInt(""+yearCalendario+ordenMes+ordenDia);
+
         if(color == ""){
             color = "Rojo";
         }
@@ -181,15 +198,16 @@ public class CrearTareaActivity extends AppCompatActivity {
             String query = "INSERT INTO "+UtilidadesDatabase.TABLA_TAREAS+"('"+UtilidadesDatabase.TAREA_TITULO+"', '"+UtilidadesDatabase.TAREA_TIPO+
                     "', '"+UtilidadesDatabase.TAREA_COLOR+"', '"+UtilidadesDatabase.TAREA_IMPORTANCIA+
                     "', '"+UtilidadesDatabase.TAREA_DIA+"', '"+UtilidadesDatabase.TAREA_MES+
-                    "', '"+UtilidadesDatabase.TAREA_YEAR+"', '"+UtilidadesDatabase.TAREA_ESTADO+"') VALUES ('"+titulo+"', '"+
-                    tag+"', '"+color+"', '" +
-                    urgente+"', '"+diaCalendario+"', '"+mesCalendario+"', '" +
-                    yearCalendario+"', '"+0+"')";
+                    "', '"+UtilidadesDatabase.TAREA_YEAR+"', '"+UtilidadesDatabase.TAREA_ESTADO+"', '"+UtilidadesDatabase.TAREA_ORDEN+"') VALUES ('"+titulo+"', '"+
+                    tag+"', '"+color+"', '" +urgente+"', '"+diaCalendario+"', '"+mesCalendario+"', '" + yearCalendario+"', '"+0+"', '"+orden+"')";
 
             db.execSQL(query);
             db.close();
 
             finish();
+            /*Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("Add", "true");
+            startActivity(i);*/
 
             Toast.makeText(this, "Tarea creada :)", Toast.LENGTH_SHORT).show();
         } else {

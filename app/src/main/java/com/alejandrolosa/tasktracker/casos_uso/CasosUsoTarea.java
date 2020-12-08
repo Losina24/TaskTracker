@@ -18,8 +18,6 @@ public class CasosUsoTarea {
     public CasosUsoTarea(Activity actividad, RepositorioTareas tareas) { // Se necesita la actividad (el contexto) y el repositorio de tareas
         this.actividad = actividad;
         this.tareas = tareas;
-        //tareas.anyadeEjemplos();
-        //tareas.generarTareas();
     }
 
     // Métodos

@@ -23,5 +23,6 @@
             android:theme="@style/Theme.VerTarea"/>
         <activity android:name=".CrearTareaActivity"
             android:theme="@style/Theme.VerTarea"/>
+        <activity android:name=".TareasCompletasActivity" android:label="Tareas completadas" />
     </application>
 </manifest>

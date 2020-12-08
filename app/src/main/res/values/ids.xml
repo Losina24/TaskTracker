@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="addTarea" type="id" />
+    <item name="acercaDe" type="id" />
+    <item name="action_settings" type="id" />
+    <item name="tareasCompletadas" type="id" />
+</resources>

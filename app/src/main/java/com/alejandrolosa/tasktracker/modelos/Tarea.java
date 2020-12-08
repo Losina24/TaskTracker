@@ -23,6 +23,17 @@ public class Tarea {
         this.id = id;
     }
 
+    public Tarea(String titulo, Fecha fecha, boolean importancia, String tipo, ColorRGB color, int id, boolean estado) { // Constructor completo
+        this.titulo = titulo;
+        this.fecha = fecha;
+        this.importante = importancia;
+        this.tipo = tipo;
+        this.color = color;
+        this.id = id;
+        this.status = estado;
+    }
+
+
     // Getters y setters
 
     public int getId() {

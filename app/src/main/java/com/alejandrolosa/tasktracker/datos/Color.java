@@ -22,7 +22,7 @@ public enum Color {
         this.nombre = nombre;
     }
 
-    public static ColorRGB getColorDadoString(String texto){
+    public static ColorRGB getColorDadoString(String texto) {
         boolean aux;
         for (Color color : Color.values()) {
             if(color.nombre.matches(texto)){
@@ -30,6 +30,16 @@ public enum Color {
             }
         }
         return ROJO.getRGB();
+    }
+
+    public static String getNombreDadoColor(ColorRGB color) {
+        boolean aux;
+        for (Color colors : Color.values()) {
+            if(colors.color == color){
+                return colors.nombre;
+            }
+        }
+        return ROJO.nombre;
     }
 
     public String getColor(){

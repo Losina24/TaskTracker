@@ -24,12 +24,12 @@ import com.alejandrolosa.tasktracker.modelos.ColorRGB;
 import com.alejandrolosa.tasktracker.modelos.Fecha;
 import com.alejandrolosa.tasktracker.modelos.Tarea;
 
-public class MainActivity extends AppCompatActivity {
+public class TareasCompletasActivity extends AppCompatActivity {
     // Atributos
     private RepositorioTareas tareas;
     private CasosUsoTarea usoTarea;
     private RecyclerView recyclerView;
-    public Adaptador adaptador;
+    public AdaptadorCompletas adaptador;
     private TextView sinTareas;
 
     // Métodos
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_completadas, menu);
         return true;
     }
 
@@ -72,17 +72,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.addTarea) {
-            lanzarAddTarea(null);
-            return true;
-        }
-
-        if (id == R.id.tareasCompletadas) {
-            lanzarTareasCompletas(null);
-            return true;
-        }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -91,12 +80,11 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         // Recycler View
-        adaptador = ((Aplicacion) getApplication()).adaptador;
+        adaptador = ((Aplicacion) getApplication()).adaptadorCompletas;
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adaptador);
-        //adaptador.notifyDataSetChanged();
 
         // Escuchador al seleccionar un elemento del RecyclerView
         adaptador.setOnItemClickListener(new View.OnClickListener() {
@@ -124,21 +112,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void lanzarTareasCompletas(View view){
-        Intent i = new Intent(this, TareasCompletasActivity.class);
-        startActivity(i);
-    }
-
-    public void lanzarAddTarea(View view){
-        usoTarea.crear();
-    }
-
     public void generarTareas(View view){
         tareas.vaciar();
         DatabaseSQLite conn = new DatabaseSQLite(this, "bd_tareas", null, 1);
         SQLiteDatabase database = conn.getWritableDatabase();
 
-        Cursor consulta = database.rawQuery("SELECT * FROM tareas WHERE estado = 0 ORDER BY orden ASC", null);
+        Cursor consulta = database.rawQuery("SELECT * FROM tareas WHERE estado = 1 ORDER BY orden ASC", null);
 
         if (consulta.moveToFirst()){
             for(int i = 0; i < consulta.getCount(); i++){
@@ -153,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
 
                 tareas.anyade(new Tarea(consulta.getString(1),
                         new Fecha(Integer.parseInt(consulta.getString(2)),
-                        Integer.parseInt(consulta.getString(3)),
-                        Integer.parseInt(consulta.getString(4))),
+                                Integer.parseInt(consulta.getString(3)),
+                                Integer.parseInt(consulta.getString(4))),
                         aux,
                         consulta.getString(6),
                         colors,
                         Integer.parseInt(consulta.getString(0)),
-                        false));
+                        true));
 
                 consulta.moveToNext();
             }

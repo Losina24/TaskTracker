@@ -35,10 +35,10 @@
         android:layout_height="match_parent"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:text="No tienes tareas, pulsa en el '+' para crear una"
+        android:text="@string/no_tienes_tareas_pulsa_en_el"
         android:textAlignment="center"
         android:textColor="#505050"
         android:textSize="18sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
