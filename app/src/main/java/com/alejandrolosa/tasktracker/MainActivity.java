@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     public Adaptador adaptador;
     private TextView sinTareas;
+    private boolean primeraEntrada;
 
     // Métodos
     @Override
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         // Creamos el caso de uso y le pasamos el contexto y el repositorio
         tareas = ((Aplicacion) getApplication()).tareas;
         usoTarea = new CasosUsoTarea(this, tareas);
+
+        primeraEntrada = false;
     }
 
     @Override
@@ -120,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
             sinTareas.setVisibility(View.GONE);
         } else {
             sinTareas.setVisibility(View.VISIBLE);
+            if(primeraEntrada == false){
+                primeraEntrada = true;
+                lanzarAddTarea(null);
+            }
         }
 
         startService(new Intent(MainActivity.this, ServicioNotificaciones.class));

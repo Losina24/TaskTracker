@@ -259,9 +259,7 @@ public class VistaTareaActivity extends AppCompatActivity {
             importance.setVisibility(View.GONE);
         }
 
-        if(tarea.isStatus() == true ){
-            checkboxTarea.setChecked(true);
-        }
+        checkboxTarea.setChecked(tarea.isStatus());
 
         ConstraintLayout color = findViewById(R.id.colorVer);
         color.setBackgroundColor(Color.rgb(tarea.getColor().getRed(), tarea.getColor().getGreen(), tarea.getColor().getBlue()));
@@ -387,9 +385,6 @@ public class VistaTareaActivity extends AppCompatActivity {
             } else {
                 importance.setVisibility(View.GONE);
             }
-
-            CheckBox status = findViewById(R.id.checkboxTareaEditar);
-            status.setChecked(Boolean.parseBoolean(consulta.getString(7)));
 
             ConstraintLayout color = findViewById(R.id.colorVer);
             color.setBackgroundColor(Color.rgb(colors.getRed(), colors.getGreen(), colors.getBlue()));
