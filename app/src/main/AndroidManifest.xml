@@ -25,5 +25,6 @@
             android:theme="@style/Theme.VerTarea"/>
         <activity android:name=".TareasCompletasActivity" android:label="Tareas completadas" />
         <activity android:name=".TareasOlvidadasActivity" android:label="Tareas olvidadas" />
+        <activity android:name=".PreferenciasActivity" android:theme="@style/Theme.TaskTracker" android:label="Preferencias" />
     </application>
 </manifest>

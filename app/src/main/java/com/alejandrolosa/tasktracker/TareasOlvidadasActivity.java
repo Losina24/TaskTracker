@@ -62,17 +62,12 @@ public class TareasOlvidadasActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            //mostrarConfigurar(null);
+            lanzarPreferencias(null);
             return true;
         }
 
         if (id == R.id.acercaDe) {
             lanzarAcercaDe(null);
-            return true;
-        }
-
-        if (id == R.id.addTarea) {
-            lanzarAddTarea(null);
             return true;
         }
 
@@ -126,6 +121,11 @@ public class TareasOlvidadasActivity extends AppCompatActivity {
 
     public void lanzarAcercaDe(View view){
         Intent i = new Intent(this, AcercaDeActivity.class);
+        startActivity(i);
+    }
+
+    public void lanzarPreferencias(View view){
+        Intent i = new Intent(this, PreferenciasActivity.class);
         startActivity(i);
     }
 

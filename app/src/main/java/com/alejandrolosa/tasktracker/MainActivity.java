@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            //mostrarConfigurar(null);
+            lanzarPreferencias(null);
             return true;
         }
 
@@ -127,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void lanzarAcercaDe(View view){
         Intent i = new Intent(this, AcercaDeActivity.class);
+        startActivity(i);
+    }
+
+    public void lanzarPreferencias(View view){
+        Intent i = new Intent(this, PreferenciasActivity.class);
         startActivity(i);
     }
 
