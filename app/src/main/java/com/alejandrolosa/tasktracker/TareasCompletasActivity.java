@@ -46,9 +46,6 @@ public class TareasCompletasActivity extends AppCompatActivity {
         // Creamos el caso de uso y le pasamos el contexto y el repositorio
         tareas = ((Aplicacion) getApplication()).tareas;
         usoTarea = new CasosUsoTarea(this, tareas);
-
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
     }
 
     @Override
@@ -69,6 +66,16 @@ public class TareasCompletasActivity extends AppCompatActivity {
 
         if (id == R.id.acercaDe) {
             lanzarAcercaDe(null);
+            return true;
+        }
+
+        if (id == R.id.tareasOlvidadas) {
+            lanzarTareasOlvidadas(null);
+            return true;
+        }
+
+        if (id == R.id.tareasPendientes) {
+            lanzarTareasPendientes(null);
             return true;
         }
 
@@ -100,11 +107,22 @@ public class TareasCompletasActivity extends AppCompatActivity {
         generarTareas(null);
 
         sinTareas = findViewById(R.id.sinTareas);
+        sinTareas.setText("No tienes tareas completadas.");
         if(tareas.tamanyo() > 0) {
             sinTareas.setVisibility(View.GONE);
         } else {
             sinTareas.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void lanzarTareasOlvidadas(View view){
+        Intent i = new Intent(this, TareasOlvidadasActivity.class);
+        startActivity(i);
+    }
+
+    public void lanzarTareasPendientes(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void lanzarAcercaDe(View view){

@@ -8,8 +8,8 @@
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="5"
         app:showAsAction="never"/>
-    <item android:title="@string/tareas_olvidadas"
-        android:id="@+id/tareasOlvidadas"
+    <item android:title="@string/tareas_completadas"
+        android:id="@+id/tareasCompletadas"
         android:icon="@android:drawable/ic_menu_info_details"
         android:orderInCategory="5"
         app:showAsAction="never"/>

@@ -26,7 +26,7 @@ import com.alejandrolosa.tasktracker.modelos.Tarea;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class TareasOlvidadasActivity extends AppCompatActivity {
     // Atributos
     private RepositorioTareas tareas;
     private CasosUsoTarea usoTarea;
@@ -48,15 +48,12 @@ public class MainActivity extends AppCompatActivity {
         // Creamos el caso de uso y le pasamos el contexto y el repositorio
         tareas = ((Aplicacion) getApplication()).tareas;
         usoTarea = new CasosUsoTarea(this, tareas);
-
-        //Intent intent = getIntent();
-        //Bundle extras = intent.getExtras();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_olvidadas, menu);
         return true;
     }
 
@@ -84,10 +81,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.tareasOlvidadas) {
-            lanzarTareasOlvidadas(null);
+        if (id == R.id.tareasPendientes) {
+            lanzarTareasPendientes(null);
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -118,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         generarTareas(null);
 
         sinTareas = findViewById(R.id.sinTareas);
+        sinTareas.setText("No tienes tareas olvidadas.");
         if(tareas.tamanyo() > 0) {
             sinTareas.setVisibility(View.GONE);
         } else {
@@ -135,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void lanzarTareasOlvidadas(View view){
-        Intent i = new Intent(this, TareasOlvidadasActivity.class);
+    public void lanzarTareasPendientes(View view){
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         int fecha = Integer.parseInt(""+yearHoy+mesHoy+diaHoy);
 
-        Cursor consulta = database.rawQuery("SELECT * FROM tareas WHERE estado = 0 AND orden >= "+fecha+" ORDER BY orden ASC", null);
+        Cursor consulta = database.rawQuery("SELECT * FROM tareas WHERE estado = 0 AND orden < "+fecha+" ORDER BY orden ASC", null);
 
         if (consulta.moveToFirst()){
             for(int i = 0; i < consulta.getCount(); i++){
@@ -171,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
 
                 tareas.anyade(new Tarea(consulta.getString(1),
                         new Fecha(Integer.parseInt(consulta.getString(2)),
-                        Integer.parseInt(consulta.getString(3)),
-                        Integer.parseInt(consulta.getString(4))),
+                                Integer.parseInt(consulta.getString(3)),
+                                Integer.parseInt(consulta.getString(4))),
                         aux,
                         consulta.getString(6),
                         colors,

@@ -428,14 +428,6 @@ public class VistaTareaActivity extends AppCompatActivity {
         } else {
             spinnerImportancia.setSelection(1);
         }
-
-        // Estado //
-        CheckBox status = findViewById(R.id.checkboxTareaEditar);
-        if(checked == true) {
-            status.setChecked(true);
-        } else {
-            status.setChecked(false);
-        }
     }
 
     // Actualizar características de la tarea (Tipo, color, importancia y fecha) //

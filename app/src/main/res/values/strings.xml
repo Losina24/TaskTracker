@@ -2,6 +2,7 @@
     <string name="app_name">TaskTracker</string>
     <string name="preferencias">Preferencias</string>
     <string name="tareas_completadas">Tareas completadas</string>
+    <string name="tareas_olvidadas">Tareas olvidadas</string>
     <string name="acerca_de">Acerca de</string>
     <string name="no_tienes_tareas_pulsa_en_el">No tienes tareas, pulsa en el \'+\'</string>
 </resources>
