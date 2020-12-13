@@ -23,6 +23,7 @@ import com.alejandrolosa.tasktracker.datos.RepositorioTareas;
 import com.alejandrolosa.tasktracker.modelos.ColorRGB;
 import com.alejandrolosa.tasktracker.modelos.Fecha;
 import com.alejandrolosa.tasktracker.modelos.Tarea;
+import com.alejandrolosa.tasktracker.servicios.ServicioNotificaciones;
 
 import java.util.Calendar;
 
@@ -48,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
         // Creamos el caso de uso y le pasamos el contexto y el repositorio
         tareas = ((Aplicacion) getApplication()).tareas;
         usoTarea = new CasosUsoTarea(this, tareas);
-
-        //Intent intent = getIntent();
-        //Bundle extras = intent.getExtras();
     }
 
     @Override
@@ -123,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             sinTareas.setVisibility(View.VISIBLE);
         }
+
+        startService(new Intent(MainActivity.this, ServicioNotificaciones.class));
     }
 
     public void lanzarAcercaDe(View view){

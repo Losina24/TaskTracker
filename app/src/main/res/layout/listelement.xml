@@ -33,14 +33,20 @@
 
         <TextView
             android:id="@+id/nombreTarea"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
             android:text="Mi tarea"
             android:textColor="#F1F1F1"
             android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/iconoAlerta"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/checkbox_tarea"
             app:layout_constraintTop_toTopOf="parent" />
 

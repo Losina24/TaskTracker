@@ -5,11 +5,13 @@
     <application
         android:name="Aplicacion"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_new_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_new_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskTracker">
+
+        <!-- Actividades -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,14 +19,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".AcercaDeActivity"
             android:theme="@style/actionDark"/>
+
         <activity android:name=".VistaTareaActivity"
             android:theme="@style/Theme.VerTarea"/>
+
         <activity android:name=".CrearTareaActivity"
             android:theme="@style/Theme.VerTarea"/>
-        <activity android:name=".TareasCompletasActivity" android:label="Tareas completadas" />
-        <activity android:name=".TareasOlvidadasActivity" android:label="Tareas olvidadas" />
-        <activity android:name=".PreferenciasActivity" android:theme="@style/Theme.TaskTracker" android:label="Preferencias" />
+
+        <activity android:name=".TareasCompletasActivity"
+            android:label="Tareas completadas" />
+
+        <activity android:name=".TareasOlvidadasActivity"
+            android:label="Tareas olvidadas" />
+
+        <activity android:name=".PreferenciasActivity"
+            android:theme="@style/Theme.TaskTracker"
+            android:label="Preferencias" />
+
+        <!-- Servicios -->
+        <service android:name=".servicios.ServicioNotificaciones" />
     </application>
 </manifest>

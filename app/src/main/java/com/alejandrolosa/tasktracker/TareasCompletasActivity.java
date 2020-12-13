@@ -60,7 +60,7 @@ public class TareasCompletasActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            //mostrarConfigurar(null);
+            lanzarPreferencias(null);
             return true;
         }
 
@@ -122,6 +122,11 @@ public class TareasCompletasActivity extends AppCompatActivity {
 
     public void lanzarTareasPendientes(View view){
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public void lanzarPreferencias(View view){
+        Intent i = new Intent(this, PreferenciasActivity.class);
         startActivity(i);
     }
 
