@@ -6,4 +6,4 @@ This project is developed for my final work of the subject: **Applications for m
 ## LANGUAGES AND TECHNOLOGIES
 *   **Java**.
 *   **XML**.
-*   **SQLite**.
+*   **SQLite**. 
